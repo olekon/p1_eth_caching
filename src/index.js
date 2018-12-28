@@ -5,8 +5,8 @@ const util = require('util');
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider(node));
 
-//Binance coin / BNB
-const contractAddress = '0xB8c77482e45F1F44dE1745F52C74426C631bDD52';
+//Insert your contract address here
+const contractAddress = '';
 const abi = require('../eth/abi.js');
 let contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -27,13 +27,13 @@ async function poll (fn) {
 }
 
 //---------------------------------------------------------------------------------------
-// creating connection pool 
+// creating connection pool - insert your credentials 
 let pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
-    user: 'sa',
-    password: '11111',
-    database: 'eth_cache'
+    user: '',
+    password: '',
+    database: ''
 })
 
 //it would be convenient to use promisified version of 'query' methods

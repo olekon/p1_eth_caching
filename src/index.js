@@ -1,5 +1,4 @@
-//const node = 'http://localhost:8545';
-const node = 'https://mainnet.infura.io/cyzlwMls9nnLIGFdysn7';
+const node = 'https://mainnet.infura.io/';
 
 const mysql = require('mysql');
 const util = require('util');

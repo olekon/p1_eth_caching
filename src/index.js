@@ -90,10 +90,6 @@ async function cacheEvents(fromBlock, toBlock) {
     }
 }
 
-async function initLatestCachedBlock() {
-    
-};
-
 async function scan() {
     const MaxBlockRange = 500000;
     

@@ -7,7 +7,7 @@ const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider(node));
 
 //Binance coin / BNB
-const contractAddress = '0x98bde3a768401260e7025faf9947ef1b81295519';
+const contractAddress = '0xB8c77482e45F1F44dE1745F52C74426C631bDD52';
 const abi = require('../eth/abi.js');
 let contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -65,7 +65,7 @@ async function writeEvent(event) {
 }
 
 async function getLatestCachedBlock() {
-    const defaultInitialBlock = 4346682;
+    const defaultInitialBlock = 0;
     
     let dbResult = await pool.query(
         'select json_unquote(json_extract(`json`,\'$.blockNumber\')) \
@@ -75,8 +75,7 @@ async function getLatestCachedBlock() {
 }
 
 async function selectTransfersFrom(sender) {
-    let dbResult = await pool.query(`select json from transfer t where t.from = \'${sender}\'`);
-    return dbResult;
+    return await pool.query(`select json from transfer t where t.from = \'${sender}\'`);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -128,22 +127,11 @@ async function scan() {
 
 
 
-// scan()
-// .then(() => {
-//     pool.end();
-// })
-// .catch(e => {
-//     console.log(`Unexpected error. Work stopped. ${e}. ${e.stack}`);
-//     pool.end();
-// });
-
-selectTransfersFrom('0xF20b9e713A33F61fA38792d2aFaF1cD30339126A')
-.then(events => {
-    console.log(events.length);
+scan()
+.then(() => {
+    pool.end();
+})
+.catch(e => {
+    console.log(`Unexpected error. Work stopped. ${e}. ${e.stack}`);
+    pool.end();
 });
-/*
-getEvents(6813920, 6813923).
-then(events => {
-    console.log(events[0]);
-});
-*/
